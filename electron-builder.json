@@ -1,9 +1,6 @@
 {
     "appId": "com.tanu.electron-react-app",
     "productName": "Electron-React-App",
-    "author": {
-        "name": "Tanu"
-    },
     "directories": {
         "output": "dist"
     },
