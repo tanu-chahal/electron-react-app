@@ -23,7 +23,7 @@ jobs:
         id: package_version
         run: |
           chcp 65001
-          $PACKAGE_VERSION = (Get-Content -Raw ./products/lcnc/package.json | ConvertFrom-Json).version
+          $PACKAGE_VERSION = (Get-Content -Raw ./package.json | ConvertFrom-Json).version
           echo "VERSION=$PACKAGE_VERSION" >> $env:GITHUB_ENV
       - run: yarn build
 
