@@ -1,0 +1,56 @@
+{
+    "appId": "com.tanu.electron-react-app",
+    "productName": "Electron React App",
+    "directories": {
+        "output": "dist"
+    },
+    "files": [
+        "dist/",
+        "src/",
+        "package.json"
+    ],
+    "asar": true,
+    "mac": {
+        "target": [
+            "dmg",
+            "zip"
+        ],
+        "category": "public.app-category.utilities",
+        "artifactName": "${productName}-${version}-${arch}.${ext}",
+        "hardenedRuntime": true,
+        "entitlements": "entitlements.mac.plist",
+        "entitlementsInherit": "entitlements.mac.plist",
+        "gatekeeperAssess": false,
+        "icon": "build/icon.ico"
+    },
+    "win": {
+        "target": [
+            "nsis"
+        ],
+        "artifactName": "${productName}-${version}-setup.${ext}",
+        "verifyUpdateCodeSignature": false,
+        "icon": "build/icon.ico"
+    },
+    "nsis": {
+        "oneClick": false,
+        "perMachine": true,
+        "allowToChangeInstallationDirectory": true,
+        "createDesktopShortcut": true,
+        "createStartMenuShortcut": true,
+        "shortcutName": "Electron React App"
+    },
+    "linux": {
+        "target": [
+            "deb",
+            "rpm",
+            "AppImage",
+            "tar.gz"
+        ],
+        "category": "Utility",
+        "artifactName": "${productName}-${version}-${arch}.${ext}"
+    },
+    "publish": {
+        "provider": "generic",
+        "url": "https://github.com/browserstack/lcnc-preprod-releases/releases"
+    }
+}
