@@ -21,7 +21,10 @@ jobs:
 
       - name: Extract version from package.json
         id: package_version
-        run: echo "VERSION=$(node -p 'require(\"./package.json\").version')" >> $GITHUB_ENV
+        run: |
+          chcp 65001
+          $PACKAGE_VERSION = (Get-Content -Raw ./products/lcnc/package.json | ConvertFrom-Json).version
+          echo "VERSION=$PACKAGE_VERSION" >> $env:GITHUB_ENV
       - run: yarn build
 
       - name: Upload build artifacts
