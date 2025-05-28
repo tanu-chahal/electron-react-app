@@ -17,10 +17,7 @@ jobs:
         with:
           node-version: 20
 
-      - name: Build Electron App
-        run: yarn build
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      - run: yarn install
 
       - name: Extract version from package.json
         id: package_version
@@ -28,7 +25,11 @@ jobs:
           chcp 65001
           $PACKAGE_VERSION = (Get-Content -Raw ./package.json | ConvertFrom-Json).version
           echo "VERSION=$PACKAGE_VERSION" >> $env:GITHUB_ENV
-      - run: yarn build
+
+      - name: Build Electron App
+        run: yarn build
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
