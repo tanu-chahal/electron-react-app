@@ -6,6 +6,7 @@
     },
     "files": [
         "dist/",
+        "build/",
         "src/",
         "package.json"
     ],
@@ -34,7 +35,7 @@
     "nsis": {
         "oneClick": false,
         "perMachine": true,
-        "allowToChangeInstallationDirectory": true,
+        "allowToChangeInstallationDirectory": false,
         "createDesktopShortcut": true,
         "createStartMenuShortcut": true,
         "shortcutName": "Electron React App"
@@ -50,7 +51,8 @@
         "artifactName": "${productName}-${version}-${arch}.${ext}"
     },
     "publish": {
-        "provider": "generic",
-        "url": "https://github.com/browserstack/lcnc-preprod-releases/releases"
+        "provider": "github",
+        "owner": "tanu-chahal",
+        "repo": "electron-react-app"
     }
 }

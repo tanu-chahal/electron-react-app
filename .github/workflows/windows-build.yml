@@ -4,10 +4,6 @@ permissions:
   contents: write
 on:
   workflow_dispatch:
-    inputs:
-      release_tag:
-        description: 'Tag for the release (e.g. v1.0.0)'
-        required: true
 
 jobs:
   build:
@@ -22,19 +18,23 @@ jobs:
           node-version: 20
 
       - run: yarn install
+
+      - name: Extract version from package.json
+        id: package_version
+        run: echo "VERSION=$(node -p \"require('./package.json').version\")" >> $GITHUB_ENV
       - run: yarn build
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
           name: windows-artifacts
-          path: dist/
+          path: dist/*-setup.exe
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ github.event.inputs.release_tag }}
-          name: Release ${{ github.event.inputs.release_tag }}
-          files: dist/**
+          tag_name: v${{ env.VERSION }}
+          name: Release v${{ env.VERSION }}
+          files: dist/*-setup.exe
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

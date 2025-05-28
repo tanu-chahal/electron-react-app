@@ -1,13 +1,14 @@
 {
   "name": "electron-react-app",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "main": "src/main.js",
   "license": "MIT",
   "scripts": {
     "dev": "concurrently \"yarn react-start\" \"yarn electron-start\"",
     "react-start": "webpack serve",
     "electron-start": "wait-on http://localhost:3000 && electron src/main.js",
-    "build": "electron-builder --config electron-builder.json"
+    "build": "yarn react-build && electron-builder --config electron-builder.json",
+    "react-build": "webpack --mode production"
   },
   "devDependencies": {
     "@babel/core": "^7.27.3",
@@ -24,6 +25,7 @@
     "webpack-dev-server": "^5.2.1"
   },
   "dependencies": {
+    "electron-updater": "^6.6.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   }
