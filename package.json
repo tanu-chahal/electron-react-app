@@ -1,6 +1,6 @@
 {
   "name": "electron-react-app",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "main": "src/main.js",
   "license": "MIT",
   "scripts": {
@@ -25,6 +25,7 @@
     "webpack-dev-server": "^5.2.1"
   },
   "dependencies": {
+    "electron-log": "^5.4.0",
     "electron-updater": "^6.6.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
