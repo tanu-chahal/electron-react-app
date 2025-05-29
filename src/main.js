@@ -1,9 +1,9 @@
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow, Menu, dialog } = require("electron");
 const path = require("path");
 const { autoUpdater } = require("electron-updater");
 const isDev = !app.isPackaged;
 
-const appVersion = require(path.join(__dirname, "..", "package.json")).version;
+const appVersion = isDev ? require(path.join(__dirname, "../package.json")).version : app.getVersion();
 
 const createAppMenu = () => {
   const template = [
@@ -11,13 +11,12 @@ const createAppMenu = () => {
       label: "Help",
       submenu: [
         {
-          label: "About",
+          label: "About Electron React App",
           click: () => {
             dialog.showMessageBox({
               type: "info",
               title: "About",
-              message: `Electron React App\nVersion: ${appVersion}`,
-              buttons: ["OK"],
+              message: `Electron React App\nVersion: ${appVersion}`
             });
           },
         },
@@ -73,6 +72,7 @@ autoUpdater.on("update-downloaded", () => {
 });
 
 app.whenReady().then(() => {
+  createAppMenu();
   createWindow();
   app.on("activate", () => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();
