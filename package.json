@@ -1,6 +1,7 @@
 {
   "name": "electron-react-app",
   "version": "1.2.5",
+  "author": "Tanu Chahal",
   "main": "src/main.js",
   "license": "MIT",
   "scripts": {
