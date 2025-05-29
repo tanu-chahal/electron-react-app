@@ -3,6 +3,32 @@ const path = require("path");
 const { autoUpdater } = require("electron-updater");
 const isDev = !app.isPackaged;
 
+const appVersion = require(path.join(__dirname, "..", "package.json")).version;
+
+const createAppMenu = () => {
+  const template = [
+    {
+      label: "Help",
+      submenu: [
+        {
+          label: "About",
+          click: () => {
+            dialog.showMessageBox({
+              type: "info",
+              title: "About",
+              message: `Electron React App\nVersion: ${appVersion}`,
+              buttons: ["OK"],
+            });
+          },
+        },
+      ],
+    },
+  ];
+
+  const menu = Menu.buildFromTemplate(template);
+  Menu.setApplicationMenu(menu);
+};
+
 function createWindow() {
   const win = new BrowserWindow({
     width: 800,
