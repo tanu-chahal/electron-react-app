@@ -43,6 +43,8 @@ function createWindow() {
       : `file://${path.join(__dirname, "../build/index.html")}`
   );
 
+  win.webContents.openDevTools({ mode: 'bottom' })
+
   win.webContents.on("did-finish-load", () => {
     autoUpdater.checkForUpdatesAndNotify();
   });
