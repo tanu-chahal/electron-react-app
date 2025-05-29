@@ -1,6 +1,9 @@
 const { app, BrowserWindow, Menu, dialog } = require("electron");
 const path = require("path");
 const { autoUpdater } = require("electron-updater");
+const log = require('electron-log');
+autoUpdater.logger = log;
+autoUpdater.logger.transports.file.level = 'info';
 const isDev = !app.isPackaged;
 
 const appVersion = isDev ? require(path.join(__dirname, "../package.json")).version : app.getVersion();
@@ -51,15 +54,15 @@ function createWindow() {
 }
 
 autoUpdater.on('checking-for-update', () => {
-  console.log('Checking for update...');
+  log.info('Checking for update...');
 });
 
 autoUpdater.on('update-not-available', () => {
-  console.log('No update available.');
+  log.info('No update available.');
 });
 
 autoUpdater.on("update-available", (info) => {
-  console.log('Update available:', info);
+  log.info('Update available:', info);
   dialog.showMessageBox({
     type: "info",
     title: "Update Available",
@@ -68,6 +71,7 @@ autoUpdater.on("update-available", (info) => {
 });
 
 autoUpdater.on("update-downloaded", () => {
+  log.info('Update downloaded and ready to install.');
   dialog
     .showMessageBox({
       type: "info",
@@ -83,7 +87,7 @@ autoUpdater.on("update-downloaded", () => {
 });
 
 autoUpdater.on('error', (err) => {
-  console.error('Update error:', err);
+  log.error('Update error:', err);
 });
 
 app.whenReady().then(() => {
