@@ -50,7 +50,16 @@ function createWindow() {
   });
 }
 
-autoUpdater.on("update-available", () => {
+autoUpdater.on('checking-for-update', () => {
+  console.log('Checking for update...');
+});
+
+autoUpdater.on('update-not-available', () => {
+  console.log('No update available.');
+});
+
+autoUpdater.on("update-available", (info) => {
+  console.log('Update available:', info);
   dialog.showMessageBox({
     type: "info",
     title: "Update Available",
@@ -71,6 +80,10 @@ autoUpdater.on("update-downloaded", () => {
         autoUpdater.quitAndInstall();
       }
     });
+});
+
+autoUpdater.on('error', (err) => {
+  console.error('Update error:', err);
 });
 
 app.whenReady().then(() => {
