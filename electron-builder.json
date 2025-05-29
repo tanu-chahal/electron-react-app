@@ -28,6 +28,7 @@
         "target": [
             "nsis"
         ],
+        "publisherName": "Tanu Chahal",
         "artifactName": "${productName}-${version}-setup.${ext}",
         "verifyUpdateCodeSignature": false,
         "icon": "build/icon.ico"
