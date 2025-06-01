@@ -32,18 +32,18 @@ jobs:
 
       - run: yarn install
 
-      - name: Extract version from package.json
-        id: package_version
+      - name: Extract version on Windows
+        if: runner.os == 'Windows'
         run: |
-          if [ "$RUNNER_OS" == "Windows" ]; then
-            chcp 65001
-            $PACKAGE_VERSION = (Get-Content -Raw ./package.json | ConvertFrom-Json).version
-            echo "VERSION=$PACKAGE_VERSION" >> $env:GITHUB_ENV
-          else
-            PACKAGE_VERSION=$(node -p "require('./package.json').version")
-            echo "VERSION=$PACKAGE_VERSION" >> $GITHUB_ENV
-          fi
-        shell: bash
+          chcp 65001
+          $PACKAGE_VERSION = (Get-Content -Raw ./package.json | ConvertFrom-Json).version
+          echo "VERSION=$PACKAGE_VERSION" >> $env:GITHUB_ENV
+
+      - name: Extract version on Unix
+        if: runner.os != 'Windows'
+        run: |
+          VERSION=$(jq -r '.version' './package.json')
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
 
       - name: Build Electron App
         run: yarn build --publish always
