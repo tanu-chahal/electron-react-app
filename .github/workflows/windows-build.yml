@@ -46,7 +46,12 @@ jobs:
           echo "VERSION=$VERSION" >> $GITHUB_ENV
 
       - name: Build Electron App
-        run: yarn build --publish always
+        run: |
+          if [[ "$RUNNER_OS" == "Windows" ]]; then
+            yarn build -- --win --x64 --ia32 --publish always
+          elif [[ "$RUNNER_OS" == "macOS" ]]; then
+            yarn build -- --mac --x64 --arm64 --publish always
+          fi
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
 

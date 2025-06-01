@@ -28,7 +28,6 @@
         "target": [
             "nsis", "zip"
         ],
-        "arch": ["x64", "ia32"],
         "artifactName": "${productName}-${version}-${arch}.${ext}",
         "verifyUpdateCodeSignature": false,
         "icon": "build/icon.ico"
