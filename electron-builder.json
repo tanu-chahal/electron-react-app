@@ -13,8 +13,7 @@
     "asar": true,
     "mac": {
         "target": [
-            "dmg",
-            "zip"
+            "dmg"
         ],
         "category": "public.app-category.utilities",
         "artifactName": "${productName}-${version}-${arch}.${ext}",
@@ -26,7 +25,7 @@
     },
     "win": {
         "target": [
-            "nsis", "zip"
+            "nsis"
         ],
         "artifactName": "${productName}-${version}-${arch}.${ext}",
         "verifyUpdateCodeSignature": false,
