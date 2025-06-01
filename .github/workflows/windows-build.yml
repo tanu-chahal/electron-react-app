@@ -46,6 +46,7 @@ jobs:
           echo "VERSION=$VERSION" >> $GITHUB_ENV
 
       - name: Build Electron App
+        shell: bash
         run: |
           if [[ "$RUNNER_OS" == "Windows" ]]; then
             yarn build -- --win --x64 --ia32 --publish always
