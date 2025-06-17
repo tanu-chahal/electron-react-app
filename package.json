@@ -8,7 +8,7 @@
     "dev": "concurrently \"yarn react-start\" \"yarn electron-start\"",
     "react-start": "webpack serve",
     "electron-start": "wait-on http://localhost:3000 && electron src/main.js",
-    "build": "yarn react-build && electron-builder --config electron-builder.json --publish never",
+    "build": "electron-builder build --config electron-builder.json --publish never",
     "react-build": "webpack --mode production"
   },
   "devDependencies": {
